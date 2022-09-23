@@ -17,6 +17,12 @@ public:
 	void setBalance(double balance) {
 		if (Validate::validateBalance(balance))
 			this->balance = balance;
+		else {
+			cout << "Enter a new balance: ";
+			double b;
+			cin >> b;
+			setBalance(b);
+		}
 	}
 	double getBalance() {
 		return balance;
@@ -59,6 +65,10 @@ public:
 		}
 		else {
 			cout << "Error, Your balance is not enough to complete this transaction." << endl;
+			cout << "Enter another balance to transfer it to another Client: ";
+			double a;
+			cin >> a;
+			transferTo(a,reciever);
 		}
 	}
 	void display() {
@@ -77,6 +87,12 @@ public:
 	void setSalary(double salary) {
 		if(Validate::validateSalary(salary))
 		this->salary = salary;
+		else {
+			cout << "Enter a new salary: ";
+			double s;
+			cin >> s;
+			setSalary(s);
+		}
 	}
 	double getSalary() {
 		return salary;
