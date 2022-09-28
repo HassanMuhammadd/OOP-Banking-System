@@ -11,9 +11,15 @@ protected:
 	int id = 0;
 	
 public:
-	
+	Person() {
+
+	}
+	Person(string name, string password, int id) {
+		this->name = name;
+		this->password = password;
+		this->id = id;
+	}
 	//setters & getters
-	
 	void setName(string name) {
 		if (Validate::validateName(name))
 			this->name = name;

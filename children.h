@@ -12,7 +12,9 @@ public:
 	Client() {
 		clientCount++;
 	}
-
+	Client(string name, string password, int id, double balance) :Person(name, password, id) {
+		this->balance = balance;
+	}
 	//setter & getter
 	void setBalance(double balance) {
 		if (Validate::validateBalance(balance))
@@ -82,7 +84,11 @@ class Employee : public Person {
 private:
 	double salary;
 public:
-	
+	Employee() {
+	}
+	Employee(string name, string password, int id, double salary) :Person(name, password, id) {
+		this->salary = salary;
+	}
 	//setter & getter
 	void setSalary(double salary) {
 		if(Validate::validateSalary(salary))
@@ -98,10 +104,10 @@ public:
 		return salary;
 	}
 	//other functionalities
-	Client addClient() {
+	/*Client addClient() {
 		Client c;
 		return c;
-	}
+	}*/
 	void display() {
 		Person::display();
 		cout << "Salary: " << getSalary();
