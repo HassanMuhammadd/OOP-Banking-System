@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "validate.h"
 using namespace std;
@@ -7,17 +8,19 @@ protected:
 
 	//default values to prevent garbage values
 	
-	string name =" ", password= " ";
-	int id = 0;
+	string name, password;
+	int id;
 	
 public:
 	Person() {
-
+		name = " ";
+		password = " ";
+		id = 0;
 	}
 	Person(string name, string password, int id) {
-		this->name = name;
-		this->password = password;
-		this->id = id;
+		setName(name);
+		setPassword(password);
+		setID(id);
 	}
 	//setters & getters
 	void setName(string name) {
