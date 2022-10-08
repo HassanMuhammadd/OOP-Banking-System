@@ -14,7 +14,7 @@ protected:
 public:
 	Person() {
 		name = " ";
-		password = " ";
+		password = "";
 		id = 0;
 	}
 	Person(string name, string password, int id) {
