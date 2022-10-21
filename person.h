@@ -6,21 +6,19 @@ using namespace std;
 class Person {
 protected:
 
-	//default values to prevent garbage values
-	
+
 	string name, password;
 	int id;
-	
+
 public:
 	Person() {
 		name = " ";
 		password = "";
 		id = 0;
 	}
-	Person(string name, string password, int id) {
+	Person(string name, string password) {
 		setName(name);
 		setPassword(password);
-		setID(id);
 	}
 	//setters & getters
 	void setName(string name) {

@@ -3,7 +3,9 @@
 #include "employee.h"
 #include "admin.h"
 #include<vector>
- 
+
+using namespace std;
+
 class DataSourceInterface {
 protected:
 	virtual void addClient(Client)=0;

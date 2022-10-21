@@ -2,10 +2,10 @@
 #include <iostream>
 #include <vector>
 #include "person.h"
+#include "screensClass.h"
+
 
 using namespace std;
-
-
 
 //finished
 class Client : public Person {
@@ -15,7 +15,7 @@ public:
 	Client() {
 
 	}
-	Client(string name, string password, int id, double balance) :Person(name, password, id) {
+	Client(string name, string password, double balance) :Person(name, password) {
 		setBalance(balance);
 	}
 	//setter & getter
@@ -63,6 +63,7 @@ public:
 	void checkBalance() {
 		cout << "Your current balance is: " << balance << endl;
 	}
+
 	void transferTo(double amount, Client& reciever) {
 		if (amount <= balance) {
 			balance -= amount;
@@ -82,4 +83,5 @@ public:
 	}
 };
 
-
+static vector<Client> allClients;
+static vector<Client>::iterator clientIt;

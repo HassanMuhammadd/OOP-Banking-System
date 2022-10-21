@@ -13,12 +13,12 @@ protected:
 public:
 	Employee() {
 	}
-	Employee(string name, string password, int id, double salary) :Person(name, password, id) {
+	Employee(string name, string password, double salary) :Person(name, password) {
 		setSalary(salary);
 	}
-	
+
 	//setter & getter
-	
+
 	void setSalary(double salary) {
 		if (Validate::validateSalary(salary))
 			this->salary = salary;
@@ -32,83 +32,63 @@ public:
 	double getSalary() {
 		return salary;
 	}
-	
+
 	//other functionalities
-	
+
 	void display() {
 		Person::display();
-		cout << "Salary: " << getSalary();
+		cout << "Salary: " << getSalary()<<endl;
+		cout << "=========================\n";
 	}
-	void Addclient(Client s) {
-		ofstream clientFile;
-		clientFile.open("clients.txt", fstream::app);
-		clientFile << s.getName() << " " << s.getID() << " " << s.getBalance() << " " << s.getPassword() << endl;
-		clientFile.close();
+	void Addclient(Client& c) {
+		allClients.push_back(c);
 	}
 	void listclient() {
-		vector<Client>allClients;
-		ifstream clientFiles("clients.txt");
-		string name, password;
-		double balance;
-		int id;
-		while (clientFiles >> name >> id >> balance >> password) {
-			Client c(name, password, id, balance);
-			allClients.push_back(c);
-		}
 		for (int i = 0; i < allClients.size(); i++) {
 			Client s = allClients[i];
-			cout <<"Client name: " << s.getName() << ", ID: " << s.getID() << ", Password: " << s.getPassword() << ", Balance: " << s.getBalance() << endl;
+			cout << "Client name: " << s.getName() << ", ID: " << s.getID() << ", Password: " << s.getPassword() << ", Balance: " << s.getBalance() << endl;
+			cout << "===============================\n";
 		}
 	}
-	Client searchclient(int id) {
+	Client* searchclient(int id) {
 		bool found = false;
-		ifstream clientFile;
-		clientFile.open("clients.txt");
-		string name;
-		string pass;
-		int oldid;
-		double balance;
-		Client returns;
-		while (clientFile >> name >> oldid >> balance >> pass)
-		{
-			if (oldid == id) {
-				found = true;
-				returns.setName(name);
-				returns.setPassword(pass);
-				returns.setBalance(balance);
+		Client returned;
+		for (clientIt = allClients.begin(); clientIt != allClients.end(); clientIt++) {
+
+			if (clientIt->getID() == id) {
+				return clientIt._Ptr;
 			}
 		}
-		if(found)
-				return returns;
-		else {
-			cout << "Client ID not found.\n";
-			return returns;
-		}
-	}
-	void editclient(string newname, string newpass,int newid,double newbalance) {
+		return NULL;
 	
-		cout << "Enter The id Of The Client: ";
+	}
+	void editclient(string newname, string newpass, int id, double newbalance) {
+		searchclient(id)->setName(newname);
+		searchclient(id)->setPassword(newpass);
+		searchclient(id)->setBalance(newbalance);
+	
+		/*cout << "Enter The id Of The Client: ";
 		int oldid;
 		cin >> oldid;
 		Client edit = searchclient(oldid);
-		
+
 		ifstream clientFile;
 		clientFile.open("clients.txt");
-		
+
 		string oldName, oldPassword;
 		int idd;
 		double oldBalance;
-	
+
 		//saving new data in temp file
 		ofstream tempFile("temp.txt");
-		while (clientFile >>oldName >> idd >> oldBalance >> oldPassword) {
+		while (clientFile >> oldName >> idd >> oldBalance >> oldPassword) {
 			if (idd == oldid) {
-				tempFile << newname << " " << newid<<" " << newbalance << " " << newpass << endl;
+				tempFile << newname << " " << newid << " " << newbalance << " " << newpass << endl;
 			}
 			else {
 				tempFile << oldName << " " << idd << " " << oldBalance << " " << oldPassword << endl;
 			}
-			
+
 		}
 		//restoring data in clients.txt
 		ifstream tempOpen("temp.txt");
@@ -119,7 +99,9 @@ public:
 		while (tempOpen >> tempName >> tempID >> tempBalance >> tempPassword) {
 			restore << tempName << " " << tempID << " " << tempBalance << " " << tempPassword << endl;
 		}
-		
+		*/
 	}
 };
 
+static vector<Employee> allEmployees;
+static vector<Employee>::iterator eIt;
