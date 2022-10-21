@@ -4,7 +4,6 @@
 #include<fstream>
 #include "client.h"
 #include "clientManager.h"
-#include"retrieve.h"
 using namespace std;
 
 int loginChoice;
